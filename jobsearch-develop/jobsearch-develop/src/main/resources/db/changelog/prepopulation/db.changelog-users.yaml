@@ -1,0 +1,109 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/prepopulation/db.changelog-users16.yaml
+  - changeSet:
+      id: 2
+      author: evolodenko
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_users_role
+                    references: roles(id)
+              - column:
+                  name: fio
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_id
+                  type: int
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_users_company
+                    references: companies(id)
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "ROLE_JOBSEEKER"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: roles
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "ROLE_EMPLOYER"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: roles
+  - changeSet:
+      id: 8
+      author: gafurov_n
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: has_private_access
+                  type: boolean
