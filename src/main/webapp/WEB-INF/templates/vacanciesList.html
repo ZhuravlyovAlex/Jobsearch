@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Вакансии</title>
+    <link th:rel="stylesheet" th:href="@{/static/css/style.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/images/favicon.ico">
+    <style>
+        .wrapper {
+            min-height: 100%;
+            margin-top: -108px;
+            padding-top: 108px;
+            margin-bottom: -255px;
+            padding-bottom: 255px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div th:replace="fragments/navigator :: navigator"></div>
+
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+
+                <section>
+                    <h4 sec:authorize="hasRole('ROLE_EMPLOYER')"><a class="btn btn-primary" href="/vacancies/save">Добавить
+                        вакансию</a></h4>
+                    <table id="vacancies" class="table table-bordered" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th>Название вакансии</th>
+                            <th>Описание</th>
+                            <th>Заплата</th>
+                            <th>Компания</th>
+                            <th sec:authorize="hasRole('ROLE_EMPLOYER')">Операции</th>
+                            <th>Отклик</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="vacancy: ${vacancies}">
+                            <td th:text="${vacancy.specialtyName}"/>
+                            <td th:text="${vacancy.specification}"/>
+                            <td th:text="${vacancy.salary}"/>
+                            <td th:text="${vacancy.company.companyName}"/>
+                            <td sec:authorize="hasRole('ROLE_EMPLOYER')"><span><a class="btn btn-warning"
+                                                                                  th:href="@{/vacancies/update/{id}(id=${vacancy.id})}">редактировать</a></span>
+                                <span><a class="btn btn-danger" th:href="@{/vacancies/delete/{id}(id=${vacancy.id})}">удалить</a></span>
+                            </td>
+                            <td sec:authorize="hasRole('ROLE_JOBSEEKER')">
+                                <form method="post" th:action="@{/decisions/save}" th:object="${decisionDto}">
+                                    <select th:name="cvId" th:field="*{cvId}">
+                                        <option th:each="cv: ${cvs}" th:value="${cv.id}"
+                                                th:text="${cv.specialtyName}"></option>
+                                    </select>
+                                    <input type="hidden" th:value="${vacancy.id}" th:attr="name='vacancyId'">
+                                    <button type="submit" class="btn btn-primary">откликнутся</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

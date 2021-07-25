@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+<!-- /.container -->
+<headear>
+    <div th:replace="fragments/header :: header"></div>
+</headear>
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <form action="#" th:action="@{/registration}" th:object="${userForm}" method="POST">
+                <h2>Регистрация</h2>
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Имя</label>
+                        <div class="col-md-3.offset-md-3">
+                            <input type="text" th:field="${userForm.username}" class="form-control" id="username"
+                                   name="username" placeholder="Username"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Пароль</label>
+                        <div class="col-md-3.offset-md-3">
+                            <input type="password" th:field="${userForm.password}" class="form-control" id="password"
+                                   name="password" placeholder="Password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordConfirm" class="col-xl-12 control-label">Повторите пароль</label>
+                        <div class="col-md-3.offset-md-3">
+                            <input type="password" th:field="${userForm.passwordConfirm}" class="form-control"
+                                   id="passwordConfirm" name="passwordConfirm" placeholder="Confirm your password"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xl-12 control-label">Компания</label>
+                        <div class="col-md-3.offset-md-3">
+                            <select th:field="${userForm.company.id}" class="custom-select">
+                                <option th:value="1" selected>выберите компанию</option>
+                                <option th:each="company : ${companies}"
+                                        th:value="${company.id}"
+                                        th:utext="${company.companyName}"/>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" th:field="${userForm.role.id}" th:value="1" id="customRadioInline1"
+                                   name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">Соискатель</label>
+                        </div>
+
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" th:field="${userForm.role.id}" th:value="2" id="customRadioInline2"
+                                   name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Работодатель</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3.offset-md-3">
+                            <a href="/login" class="btn btn-primary btn-lg">Войти</a>
+                            <button type="submit" id="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+                        </div>
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

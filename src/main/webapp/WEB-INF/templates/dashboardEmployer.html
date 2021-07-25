@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title> JOBSearch.com: Рабочий кабинет </title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-4 col-lg-3 navbar-container bg-light">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <!-- Вертикальное меню -->
+                        <!--/*@thymesVar id="user" type="ru.innopolis.jobsearch.entity.User"*/-->
+                        <ul class="navbar-nav mr-auto flex-column" >
+                            <li class="nav-item">
+                                <a class="nav-link"  href="/vacancies/save">СОЗДАТЬ ВАКАНСИЮ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/vacancies/my">МОИ ВАКАНСИИ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/decisions">ОТКЛИКИ НА ВАКАНСИЮ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#link-4">ПОИСК РЕЗЮМЕ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/companyInfo">КОНТАКТНЫЕ ДАННЫЕ</a>
+                            </li>
+                            <li class="nav-item" >
+                                <a class="nav-link" href="/payment" th:if="${!#authentication.getPrincipal().isHasPrivateAccess()}">ПРЕМИУМ АККАУНТ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+                <h1 class="h3 text-center mt-5"><span th:text="${#authentication.getPrincipal().getUsername()}"></span>, добрый день.</h1>
+                <h2 class="lead text-center">мы рады, что вы снова с нами</h2>
+                <hr class="mb-5">
+                <section >
+
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<footer>
+    <div th:replace="fragments/footer :: footer"> </div>
+</footer>
+</body>
+</html>

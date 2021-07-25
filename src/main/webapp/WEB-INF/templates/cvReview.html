@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновить резюме</title>
+    <link th:rel="stylesheet" th:href="@{/static/css/style.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"
+          href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="fragments/navigator :: navigator"></div>
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+                <!-- class="was-validated" -->
+                <form action="#" th:method="POST" th:object="${cvDto}">
+
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="specialtyName">Специальность:</label>
+                            <input type="text" th:disabled="disabled" class="form-control" th:field="*{specialtyName}"
+                                   id="specialtyName"
+                                   placeholder="Введите специальность"
+                                   name="specialtyName" required>
+                            <!--            <div class="valid-feedback">Valid.</div>-->
+                            <!--            <div class="invalid-feedback">Please fill out this field.</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Описание:</label>
+                            <!--            <textarea type="text" class="form-control" id="description" placeholder="Введите описание"-->
+                            <!--                      name="description" required>-->
+                            <textarea th:disabled="disabled" id="description" class="md-textarea form-control"
+                                      th:field="*{description}"
+                                      rows="3"
+                                      placeholder="Введите описание"
+                                      name="description"></textarea>
+                            <!-- <div class="valid-feedback">Valid.</div>-->
+                            <!--            <div class="invalid-feedback">Please fill out this field.</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="specialtyName">Заработная плата:</label>
+                            <input th:disabled="disabled" type="number" class="form-control" id="salary"
+                                   th:field="*{salary}"
+                                   placeholder="Введите забаротную плату"
+                                   name="salary" required>
+                            <!--            <div class="valid-feedback">Valid.</div>-->
+                            <!--            <div class="invalid-feedback">Please fill out this field.</div>-->
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div> <!-- wrapper -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

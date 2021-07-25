@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Сохранить резюме</title>
+    <link th:rel="stylesheet" th:href="@{/static/css/style.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"
+          href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="fragments/navigator :: navigator"></div>
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+                <!-- class="was-validated" -->
+                <form th:action="@{/vacancies/save}" th:method="post" th:object="${vacancyDto}"
+                      enctype="multipart/form-data">
+
+
+                    <div class="form-group">
+                        <label for="specialtyName">Название:</label>
+                        <input type="text" class="form-control" th:field="*{specialtyName}" id="specialtyName"
+                               placeholder="Введите специальность"
+                               name="specialtyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Описание:</label>
+                        <textarea id="description" class="md-textarea form-control" th:field="*{specification}" rows="3"
+                                  placeholder="Введите описание"
+                                  name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialtyName">Заработная плата:</label>
+                        <input type="number" class="form-control" id="salary" th:field="*{salary}"
+                               placeholder="Введите забаротную плату"
+                               name="salary" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div> <!-- wrapper -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

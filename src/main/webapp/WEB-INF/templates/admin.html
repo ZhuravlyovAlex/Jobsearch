@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Log in with your account</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+<div>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>UserName</th>
+        <th>Password</th>
+        <th>Roles</th>
+        </thead>
+        <!--    <c:forEach items="${allUsers}" var="user">-->
+        <tr th:each="user: ${allUsers}">
+            <td th:text="*{id}"/>
+            <td th:text="*{username}"/>
+            <td th:text="*{password}"/>
+            <td>
+                <span th:each="role: *{roles}" th:text="${role.name}"/>
+            </td>
+            <td>
+                <form th:action="@{/admin}" method="post">
+                    <input type="hidden" name="userId" value="${user.id}"/>
+                    <input type="hidden" name="action" value="delete"/>
+                    <button type="submit">Delete</button>
+                </form>
+
+            </td>
+        </tr>
+        <!--    </c:forEach>-->
+    </table>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>

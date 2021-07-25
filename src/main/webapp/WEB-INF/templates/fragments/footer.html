@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>footer</title>
+    <style>
+        .copyright-text {
+            margin-left: 5px;
+            color: #737373;
+        }
+        .text-justify {
+            margin-left: 5px;
+            color: #737373;
+        }
+    </style>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<!--site-footer fixed-bottom-->
+<footer class="site-footer bg-dark">
+    <link href="/static/css/footer.css" rel="stylesheet" type="text/css">
+    <div class="container">
+        <div class="row_top">
+            <div class="col-sm-12 col-md-6">
+                <h6>О нас</h6>
+                <p class="text-justify">JOBSearch.com <i>Быстрый поиск хорошей работы </i> Наша компания
+                    специализируется на подборе высокопрофессианального персонала в сфере IT</p>
+            </div>
+
+            <div class="col-xs-6 col-md-3" sec:authorize="!isAuthenticated()">
+                <h6>Категории</h6>
+                <ul class="footer-links">
+                    <li><a href="/login">Вход</a></li>
+                    <li><a href="/registration">Регистрация</a></li>
+                    <li><a href="/vacancies">Вакансии</a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3" sec:authorize="hasRole('ROLE_JOBSEEKER')">
+                <h6>Категории</h6>
+                <ul class="footer-links">
+                    <li><a href="/vacancies">Список вакансий</a></li>
+                    <li><a href="/cvs/save">Создать резюме</a></li>
+                    <li><a href="">Мои резюме</a></li>
+                    <li><a href="">Мои отклики</a></li>
+                    <li><a href="/dashboardJobSeeker">Личный кабинет</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3" sec:authorize="hasRole('ROLE_EMPLOYER')">
+                <h6>Категории</h6>
+                <ul class="footer-links">
+                    <li><a href="/vacancies/save">Создать вакансию</a></li>
+                    <li><a href="/vacancies">Мои вакансии</a></li>
+                    <li><a href="">Отклики на вакансии</a></li>
+                    <li><a href="">Поиск резюме</a></li>
+                    <li><a href="/dashboardEmployer">Личный кабинет</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h6>Быстрые ссылки</h6>
+                <ul class="footer-links">
+                    <li><a href="">О нас</a></li>
+                    <li><a href="">Контактная информация</a></li>
+                    <li><a href="/dashboardJobSeeker">Соискателям</a></li>
+                    <li><a href="/dashboardEmployer">Работодателям</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="container container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">Copyright &copy; 2021 JOBSearch by Iskhakova Team INNOPOLIS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<!-- БОКОВОЕ МЕНЮ -->
+<navigator class="col-md-4 col-lg-3 navbar-container bg-light" sec:authorize="hasRole('ROLE_JOBSEEKER')">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <!-- Вертикальное меню -->
+            <ul class="navbar-nav mr-auto flex-column   ">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cvs/save">СОЗДАТЬ РЕЗЮМЕ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cvs/">МОИ РЕЗЮМЕ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vacancies">ВАКАНСИИ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/decisions">ОТКЛИКИ И ПРИГЛАШЕНИЯ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userInfo">КОНТАКТНЫЕ ДАННЫЕ</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="/payment" th:if="${!#authentication.getPrincipal().isHasPrivateAccess()}">ПРЕМИУМ АККАУНТ</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</navigator>
+
+<navigator class="col-md-4 col-lg-3 navbar-container bg-light" sec:authorize="hasRole('ROLE_EMPLOYER')">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <!-- Вертикальное меню -->
+            <ul class="navbar-nav mr-auto flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/vacancies/save">СОЗДАТЬ ВАКАНСИЮ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vacancies/my">МОИ ВАКАНСИИ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/decisions">ОТКЛИКИ НА ВАКАНСИЮ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#link-4">ПОИСК РЕЗЮМЕ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/companyInfo">КОНТАКТНЫЕ ДАННЫЕ</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="/payment" th:if="${!#authentication.getPrincipal().isHasPrivateAccess()}">ПРЕМИУМ АККАУНТ</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</navigator>
+</html>

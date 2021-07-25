@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Мои резюме</title>
+    <link th:rel="stylesheet" th:href="@{/static/css/style.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div th:replace="fragments/navigator :: navigator"></div>
+
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+
+                <section>
+                    <h4><a class="btn btn-primary" href="/cvs/save">Добавить резюме</a></h4>
+                    <div class="row">
+                        <table id="vacancies" class="table table-bordered" style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Специалность</th>
+                                <th>Описание</th>
+                                <th>Зарплата</th>
+                                <th>Видимость</th>
+                                <th>Операции</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cv: ${cvs}">
+                                <td th:text="${cv.id}"/>
+                                <td th:text="${cv.specialtyName}"/>
+                                <td th:text="${cv.description}"/>
+                                <td th:text="${cv.salary}"/>
+                                <td th:text="${cv.visible}"/>
+                                <td><span><a class="btn btn-warning" th:href="@{/cvs/update/{id}(id=${cv.id})}">редактировать</a></span>
+                                    <span><a class="btn btn-danger" th:href="@{/cvs/delete/{id}(id=${cv.id})}">удалить</a></span></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div> <!-- wrapper -->
+<!-- FOOTER -->
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

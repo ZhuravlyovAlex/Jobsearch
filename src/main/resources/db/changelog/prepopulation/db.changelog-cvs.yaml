@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-cvs16.yaml
+  - changeSet:
+      id: 3
+      author: evolodenko
+      changes:
+        - createTable:
+            tableName: cvs
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: specialty_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: salary
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visible
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_cvs_user
+                    references: users(id)

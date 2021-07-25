@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Мои отклики И приглашения</title>
+    <link th:rel="stylesheet" th:href="@{/static/css/style.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div class="wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div th:replace="fragments/navigator :: navigator"></div>
+
+            <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+
+                <section>
+                    <div class="row">
+                        <table id="decisions" class="table table-bordered" style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Вакансия</th>
+                                <th>Резюме</th>
+                                <th>Ответ</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="decision: ${decisions}">
+                                <td th:text="${decision.id}"/>
+                                <td><a class="btn btn-link" th:href="@{/vacancies/review/{vacancyId}(vacancyId=${decision.vacancy.id})}"><span th:text="${decision.vacancy.specialtyName}"></span></a></td>
+                                <td><a class="btn btn-link" th:href="@{/cvs/review/{cvId}(cvId=${decision.cv.id})}"><span th:text="${decision.cv.specialtyName}"></span></a></td>
+                                <td th:class="${decision.decision} ? 'alert alert-success' : 'alert alert-danger'" th:text="${decision.decision} ? 'принято' : 'отказано'" sec:authorize="hasRole('ROLE_JOBSEEKER')"/>
+                                <td sec:authorize="hasRole('ROLE_EMPLOYER')">
+                                    <form method="post" th:action="@{/decisions/accept}" th:object="${decisionDto}">
+                                        <input type="checkbox" th:checked="${decision.decision}" th:attr="name='decision'"/>
+                                        <input type="hidden" th:value="${decision.cv.id}" th:attr="name='cvId'">
+                                        <input type="hidden" th:value="${decision.vacancy.id}" th:attr="name='vacancyId'">
+                                        <input type="hidden" th:value="${decision.id}" th:attr="name='id'">
+
+                                        <button type="submit" class="btn btn-primary">уведомить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div> <!-- wrapper -->
+<!-- FOOTER -->
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

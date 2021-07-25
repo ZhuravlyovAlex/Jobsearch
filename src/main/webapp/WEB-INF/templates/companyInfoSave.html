@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JOBSearch.com: Контактная информация</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+</head>
+<body>
+<!-- /.container -->
+<div th:replace="fragments/header :: header"></div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:replace="fragments/navigator :: navigator"></div>
+
+        <div class="col-md-8 col-lg-9 content-container" style="background-color: #f7ead7">
+
+            <section>
+
+
+                <form th:action="@{/companyInfo/save}" th:method="post" th:object="${companyDto}"
+                      enctype="multipart/form-data">
+
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="companyName" class="col-sm-2 control-label">Имя компании<span class="red">*</span></label>
+                            <div class="col-md-3.offset-md-3">
+                                <input type="text" class="form-control" th:field="*{companyName}" id="companyName" name="companyName"
+                                       placeholder="Укажите название компании" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inn" class="col-sm-2 control-label">ИНН<span class="red">*</span></label>
+                            <div class="col-md-3.offset-md-3">
+                                <input type="inn" class="form-control" th:field="*{inn}" id="inn" name="inn"
+                                       placeholder="Укажите ИНН компании" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kpp" class="col-sm-2 control-label">КПП<span class="red">*</span></label>
+                            <div class="col-md-3.offset-md-3">
+                                <input type="kpp" class="form-control" th:field="*{kpp}" id="kpp" name="kpp"
+                                       placeholder="Укажите КПП компании" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3.offset-md-3">
+                                <button type="submit" id="submit" class="btn btn-primary">Сохранить</button>
+                                <div></div>
+                            </div>
+                        </div>
+
+                    </form>
+                </form>
+
+            </section>
+        </div>
+    </div>
+</div>
+</div> <!-- wrapper -->
+<!-- FOOTER -->
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

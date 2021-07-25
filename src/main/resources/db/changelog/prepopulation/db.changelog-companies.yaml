@@ -1,0 +1,105 @@
+databaseChangeLog:
+
+  - logicalFilePath: db/changelog/db.changelog-companies16.yaml
+  - changeSet:
+      id: 1
+      author: ngafurov
+      changes:
+        - createTable:
+            tableName: companies
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: inn
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: kpp
+                  type: varchar(9)
+                  constraints:
+                    nullable: false
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: company_name
+                  value: "Иннополис"
+              - column:
+                  name: inn
+                  value: "7654321"
+              - column:
+                  name: kpp
+                  value: "1234567"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: companies
+
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: company_name
+                  value: "Яндекс"
+              - column:
+                  name: inn
+                  value: "1234567"
+              - column:
+                  name: kpp
+                  value: "7654321"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: companies
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: company_name
+                  value: "Сбербанк"
+              - column:
+                  name: inn
+                  value: "1234567"
+              - column:
+                  name: kpp
+                  value: "7654321"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: companies
+        - insert:
+            catalogName: jobsearch
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: company_name
+                  value: "Пятерочка"
+              - column:
+                  name: inn
+                  value: "1234567"
+              - column:
+                  name: kpp
+                  value: "7654321"
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: companies

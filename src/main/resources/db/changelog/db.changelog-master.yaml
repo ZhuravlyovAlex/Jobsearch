@@ -1,0 +1,21 @@
+databaseChangeLog:
+
+  - include:
+      file: prepopulation/db.changelog-companies.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: prepopulation/db.changelog-users.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: prepopulation/db.changelog-cvs.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: prepopulation/db.changelog-vacancies.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: prepopulation/db.changelog-decisions.yaml
+      relativeToChangelogFile: true

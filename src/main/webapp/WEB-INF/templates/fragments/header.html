@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>header</title>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<header class="p-3 bg-dark text-white">
+    <link href="/static/css/header.css" rel="stylesheet" type="text/css">
+    <div class="header">
+        <div class="header_section">
+            <div class="header_logo">
+                <H1><a href="/">JOBsearch</a></H1>
+            </div>
+            <div class="header_item headerButton" sec:authorize="hasRole('ROLE_JOBSEEKER')">
+                <a href="/dashboardJobSeeker">СОИСКАТЕЛЯМ</a></div>
+            <div class="header_item headerButton" sec:authorize="hasRole('ROLE_EMPLOYER')">
+                <a href="/dashboardEmployer">РАБОТОДАТЕЛЯМ</a>
+            </div>
+        </div>
+        <div class="header_section">
+            <div sec:authorize="isAuthenticated()">
+                <span sec:authentication="name"></span>
+                <span class="header_item headerButton" sec:authorize="hasRole('ROLE_JOBSEEKER')">
+                        <a href="/cvs/save" class="btn_create_cv">СОЗДАТЬ РЕЗЮМЕ</a></span>
+                <span class="header_item headerButton" sec:authorize="hasRole('ROLE_EMPLOYER')">
+                        <a href="/vacancies/save" class="btn_create_cv">СОЗДАТЬ ВАКАНСИЮ</a></span>
+                <span class="header_item headerButton">
+                        <a href="/logout" class="btn_login">ВЫЙТИ</a>
+                    </span>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <div class="header_item headerButton">
+                    <a href="/login" class="btn_login">ВОЙТИ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</html>
+
